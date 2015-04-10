@@ -1,5 +1,7 @@
 PImage helicopterltr;
 PImage helicopterrtl;
+int xltr = 0;
+int xrtl = 300;
 void setup()
 {
   size(300, 300);
@@ -10,6 +12,10 @@ void setup()
 
 void draw()
 {
- image(helicopterrtl, 0, 0);
- image(helicopterltr, 0, 50);
+ background(233);
+ image(helicopterrtl, xrtl, random(50));
+ image(helicopterltr, xltr, random(50));
+ 
+ xltr += 1;
+ xrtl -= 1;
 }

@@ -1,31 +1,39 @@
 PImage helicopterltr;
 PImage helicopterrtl;
-int xltr = 0;
-int xrtl = 300;
 float y = 0;
 int x = 0;
+float enemy = 0;
 void setup()
 {
   size(300, 300);
-  helicopterrtl = loadImage("helicopter right to left.gif");
   helicopterltr = loadImage("helicopter left to right.gif");
-  newHeliLeft();
-
+  newHeli();
 }
 
 void draw()
 {
  background(233);
  image(helicopterltr, x, y);
- //image(helicopterltr, xltr, y);
- 
- x = x + 1; //update x poistion
+ x += 1; //update xltr position
+ if (x == 350)
+ {
+   newHeli();
+ }
+ enemy = random(100, 200);
+ if ( x == enemy)
+ {
+  newEnemy(); 
+ }
  
 }
 
-void newHeliLeft()
+void newHeli()
 {
- x = 0; //horizontal poistion
+ x = -100; //horizontal poistion
  y = random(0, 50); //random y position in between 0 and 50
+}
+
+void newEnemy()
+{
   
 }

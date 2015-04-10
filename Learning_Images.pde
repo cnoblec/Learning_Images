@@ -1,39 +1,82 @@
-PImage helicopterltr;
-PImage helicopterrtl;
+PImage helicopter;
 float y = 0;
 int x = 0;
-float enemy = 0;
+float enemySpawn = 0;
+float enemyX = 0;
+float enemyY = 0;
+
 void setup()
 {
+  //
+  // set the size of the canvas
+  //
   size(300, 300);
-  helicopterltr = loadImage("helicopter left to right.gif");
+  
+  //
+  //saying that helicopter is the name of the file
+  //
+  helicopter = loadImage("helicopter left to right.gif");
+  
+  //
+  //make a new helicopter
+  //
   newHeli();
 }
 
 void draw()
 {
- background(233);
- image(helicopterltr, x, y);
- x += 1; //update xltr position
- if (x == 350)
- {
-   newHeli();
- }
- enemy = random(100, 200);
- if ( x == enemy)
- {
-  newEnemy(); 
- }
- 
+  //
+  //make the background
+  //
+  background(233);
+  
+  //
+  //make the helicopter image appear
+  //
+  image(helicopter, x, y);
+  
+  //
+  //update x position
+  //
+  x += 1; 
+  
+  //
+  //when the heli reaches the end of the screen (plus a little) make another
+  //
+  if (x == 350)
+  {
+    newHeli();
+  }
+  
+  //
+  //when the helicopter reaches where the enemy will spawn run newEnemy
+  //
+  if ( x == enemySpawn)
+  {
+    newEnemy();
+  }
 }
 
+//
+//
+//
 void newHeli()
 {
- x = -100; //horizontal poistion
- y = random(0, 50); //random y position in between 0 and 50
+  x = -100;
+  
+  //
+  ///random y position in between 0 and 50
+  //
+  y = random(0, 50); 
+  
+  //
+  //Pick an enemy spawn point(that corresponds with the heli)
+  //
+  enemySpawn = random(100, 200); //random spawn for the enemy
 }
 
 void newEnemy()
 {
-  
+  enemyX = x;
+  enemyY = y;
 }

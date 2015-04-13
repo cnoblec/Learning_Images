@@ -38,6 +38,7 @@ void draw()
   //
   //the enemy will be a box for testing purposes
   //
+  fill(0);
   rect(enemyX, enemyY, 25, 25);
 
   //
@@ -70,8 +71,15 @@ void draw()
   //
   //Make the ground, just a rectangle
   //
-  fill(0);
-  rect(0, 250, 500, 100);
+  noStroke();
+  fill(139);
+  rect(0, 250, 500, 50);
+  
+  //
+  //Create the turret base, based off of my drawing
+  //
+  fill(175);
+  rect(215, 250, 70, -25, 7, 7, 0, 0);
 }
 
 //

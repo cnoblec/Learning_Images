@@ -76,7 +76,12 @@ void draw()
   rect(0, 250, 500, 50);
   
   //
-  //Create the turret base, based off of my drawing
+  //Create the circle on top of the turret base which the barrel will turn around
+  //
+  ellipse(250, 225, 25, 25);
+  
+  //
+  //Create the turret base with rounded edges
   //
   fill(175);
   rect(215, 250, 70, -25, 7, 7, 0, 0);

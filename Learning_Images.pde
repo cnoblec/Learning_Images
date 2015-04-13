@@ -10,7 +10,7 @@ void setup()
   //
   // set the size of the canvas
   //
-  size(300, 300);
+  size(500, 300);
 
   //
   //saying that helicopter is the name of the file
@@ -54,7 +54,7 @@ void draw()
   //
   //when the heli reaches the end of the screen (plus a little) make another
   //
-  if (x == 400)
+  if (x == 600)
   {
     newHeli();
   }
@@ -66,6 +66,12 @@ void draw()
   {
     newEnemy();
   }
+  
+  //
+  //Make the ground, just a rectangle
+  //
+  fill(0);
+  rect(0, 250, 500, 100);
 }
 
 //
@@ -86,7 +92,7 @@ void newHeli()
   //
   //Pick a random enemy spawn point(that corresponds with the heli)
   //
-  enemySpawn = random(100, 200);
+  enemySpawn = random(100, 300);
 }
 
 //

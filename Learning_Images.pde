@@ -1,8 +1,12 @@
 PImage helicopter;
 float y = 0;
-int x = 0;
+float x = 0;
 float enemySpawn = 0;
-float enemyX = 0;
+
+//
+//set the enemy spawn off of the screen
+//
+float enemyX = -100;
 float enemyY = 0;
 
 void setup()
@@ -40,6 +44,7 @@ void draw()
   //
   fill(0);
   rect(enemyX, enemyY, 25, 25);
+  
 
   //
   //update x position
@@ -63,6 +68,8 @@ void draw()
   //
   //when the helicopter reaches where the enemy will spawn run newEnemy
   //
+  println("x is: " + x);
+  println("enemySpawn is: " + enemySpawn);
   if ( x == enemySpawn)
   {
     newEnemy();
@@ -105,7 +112,7 @@ void newHeli()
   //
   //Pick a random enemy spawn point(that corresponds with the heli)
   //
-  enemySpawn = random(100, 300);
+  enemySpawn = floor(random(50, 450));
 }
 
 //
@@ -121,6 +128,4 @@ void newEnemy()
   //the enemy y will be the same as the heicopter when it spawns
   //
   enemyY = y;
-
-
 }

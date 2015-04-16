@@ -1,13 +1,14 @@
 PImage helicopter;
-float y = 0;
-float x = 0;
+float heliY = 0;
+float heliX = 0;
 float enemySpawn = 0;
+float fallSpeed = 1;
 
 //
 //set the enemy spawn off of the screen
 //
 float enemyX = -100;
-float enemyY = 0;
+int enemyY = -1000;
 
 void setup()
 {
@@ -37,7 +38,7 @@ void draw()
   //
   //make the helicopter image appear
   //
-  image(helicopter, x, y);
+  image(helicopter, heliX, heliY);
   
   //
   //the enemy will be a box for testing purposes
@@ -45,22 +46,26 @@ void draw()
   fill(0);
   rect(enemyX, enemyY, 25, 25);
   
-
   //
   //update x position
   //
-  x += 1; 
+  heliX += 1;
 
   //
   //the enemy will "fall" (increase in the y) from the origin
   //
-  enemyY += 1;
+  enemyY += fallSpeed;
+  //enemyY = enemyY*fallSpeed;
 
+if (enemyY == 225)
+{
+ fallSpeed = 0; 
+}
 
   //
   //when the heli reaches the end of the screen (plus a little) make another
   //
-  if (x == 600)
+  if (heliX == 600)
   {
     newHeli();
   }
@@ -68,9 +73,10 @@ void draw()
   //
   //when the helicopter reaches where the enemy will spawn run newEnemy
   //
-  println("x is: " + x);
+  println("x is: " + heliX);
   println("enemySpawn is: " + enemySpawn);
-  if ( x == enemySpawn)
+  println("enemyY is: " + enemyY);
+  if ( heliX == enemySpawn)
   {
     newEnemy();
   }
@@ -102,17 +108,23 @@ void newHeli()
   //
   //the x is set off the screen so that you will see it "fly" on to the screen.
   //
-  x = -100;
+  heliX = -100;
 
   //
   ///random y position in between 0 and 50
   //
-  y = random(0, 50); 
+  heliY = floor(random(0, 50)); 
 
   //
   //Pick a random enemy spawn point(that corresponds with the heli)
   //
   enemySpawn = floor(random(50, 450));
+  
+  //
+  //change fall speed from 0 to 1
+  //
+  fallSpeed = 1;
+  
 }
 
 //
@@ -123,9 +135,9 @@ void newEnemy()
   //
   //the enemy x will be the same as the helicopters x
   //
-  enemyX = x;
+  enemyX = heliX;
   //
   //the enemy y will be the same as the heicopter when it spawns
   //
-  enemyY = y;
+  enemyY = floor(heliY);
 }

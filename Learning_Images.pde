@@ -5,6 +5,7 @@ float heliY = 0;
 float heliX = 0;
 float enemySpawn = 0;
 float fallSpeed = 1;
+float angle = 0;
 
 //
 //set the enemy spawn off of the screen
@@ -112,8 +113,37 @@ void draw()
   //
   //Create the circle on top of the turret base which the barrel will turn around
   //
-  ellipse(250, 225, 25, 25);
+  ellipse(250, 225, 35, 35);
 
+  pushMatrix();
+  translate(250, 225);
+  rotate(angle);
+  rect(-5, -15, 10, -17);
+  popMatrix();
+
+  //
+  //left and right key presses increase or decrease the angle
+  //
+  if (keyPressed) 
+  {
+    if (keyCode == LEFT) 
+    {
+      angle -= 0.03;
+    }
+    if (keyCode == RIGHT) 
+    {
+      angle += 0.03;
+    }
+  }
+  if (angle < -1.2)
+  {
+   angle = -1.2;
+  }
+  if (angle > 1.2)
+  {
+   angle = 1.2;
+  }
+println("angle is " +angle);
   //
   //Create the turret base with rounded edges
   //
@@ -121,10 +151,10 @@ void draw()
   rect(215, 250, 70, -25, 7, 7, 0, 0);
 }
 
-void keyPressed()
-{
-  newHeli();
-}
+// void keyPressed()
+// {
+//   newHeli();
+// }
 
 //
 //this is where the helicopter spawn points are
@@ -145,13 +175,11 @@ void newHeli()
   //Pick a random enemy spawn point(that corresponds with the heli)
   //
   enemySpawn = floor(random(50, 450));
-  while (enemySpawn >225 && enemySpawn <275)
+  while (enemySpawn >215 && enemySpawn <285)
   {
     enemySpawn = floor(random(50, 450));
     println("enemySpawn is: " + enemySpawn);
   }
- 
-
 }
 
 //
@@ -167,7 +195,7 @@ void newEnemy()
   //the enemy y will be the same as the heicopter when it spawns
   //
   enemyY = floor(heliY);
-  
+
   //
   //change fall speed from 0 to 1
   //

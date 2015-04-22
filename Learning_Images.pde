@@ -115,7 +115,14 @@ void draw()
   //
   ellipse(250, 225, 35, 35);
 
+  //
+  //moves the origin point of canvas
+  //
   pushMatrix();
+  
+  //
+  //makes the new origin the center of the circle
+  //
   translate(250, 225);
   rotate(angle);
   rect(-5, -15, 10, -17);
@@ -135,15 +142,18 @@ void draw()
       angle += 0.03;
     }
   }
+  //
+  //stop the roatation when the angle is -1.2 and when it is 1.2
+  //
   if (angle < -1.2)
   {
-   angle = -1.2;
+    angle = -1.2;
   }
   if (angle > 1.2)
   {
-   angle = 1.2;
+    angle = 1.2;
   }
-println("angle is " +angle);
+  println("angle is " +angle);
   //
   //Create the turret base with rounded edges
   //

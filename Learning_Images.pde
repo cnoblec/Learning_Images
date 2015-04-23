@@ -6,6 +6,7 @@ float heliX = 0;
 float enemySpawn = 0;
 float fallSpeed = 1;
 float angle = 0;
+int health = 1000;
 
 //
 //set the enemy spawn off of the screen
@@ -119,7 +120,7 @@ void draw()
   //moves the origin point of canvas
   //
   pushMatrix();
-  
+
   //
   //makes the new origin the center of the circle
   //
@@ -141,7 +142,12 @@ void draw()
     {
       angle += 0.03;
     }
+    if (keyCode == ENTER) 
+   {
+     newHeli();
+   }
   }
+
   //
   //stop the roatation when the angle is -1.2 and when it is 1.2
   //
@@ -153,18 +159,35 @@ void draw()
   {
     angle = 1.2;
   }
-  println("angle is " +angle);
+  
+  //
+  //keep on picking random enemySpawns until it fits the criteria
+  //
+    if (enemySpawn >175 && enemySpawn <325)
+  {
+    enemySpawn = floor(random(50, 450));
+    println("enemySpawn is: " + enemySpawn);
+  }
+  
   //
   //Create the turret base with rounded edges
   //
   fill(175);
   rect(215, 250, 70, -25, 7, 7, 0, 0);
-}
 
-// void keyPressed()
-// {
-//   newHeli();
-// }
+  if (enemyY == 220 && frameCount%60 == 0)
+  {
+    health -= 5;
+  }
+  //println("health: " + health);
+  
+  //
+  //represent the health with a bar and text
+  //
+  fill(255);
+  textSize(32);
+  text("HP: " + health, 0, 287);
+}
 
 //
 //this is where the helicopter spawn points are
@@ -185,11 +208,7 @@ void newHeli()
   //Pick a random enemy spawn point(that corresponds with the heli)
   //
   enemySpawn = floor(random(50, 450));
-  while (enemySpawn >215 && enemySpawn <285)
-  {
-    enemySpawn = floor(random(50, 450));
-    println("enemySpawn is: " + enemySpawn);
-  }
+  
 }
 
 //

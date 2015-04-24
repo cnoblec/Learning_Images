@@ -7,6 +7,7 @@ float enemySpawn = 0;
 float fallSpeed = 1;
 float angle = 0;
 int health = 1000;
+float healthBar = 0;
 
 //
 //set the enemy spawn off of the screen
@@ -44,6 +45,7 @@ void draw()
   //make the background
   //
   background(233);
+  noStroke();
 
   //
   //make the helicopter image appear
@@ -107,7 +109,6 @@ void draw()
   //
   //Make the ground, just a rectangle
   //
-  noStroke();
   fill(139);
   rect(0, 250, 500, 50);
 
@@ -182,11 +183,21 @@ void draw()
   //println("health: " + health);
   
   //
+  //the healthBar is the health /100
+  //
+  healthBar = health/10;
+  
+  //
   //represent the health with a bar and text
   //
   fill(255);
   textSize(32);
-  text("HP: " + health, 0, 287);
+  text("HP: ", 0, 287);
+  rect(60, 260, healthBar, 32);
+  stroke(0);
+  noFill();
+  rect(60, 260, 100, 32);
+  noStroke();
 }
 
 //

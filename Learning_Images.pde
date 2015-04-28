@@ -8,6 +8,8 @@ float fallSpeed = 1;
 float angle = 0;
 int health = 1000;
 float healthBar = 0;
+float bulletX = 10000;
+float bulletD = 0;
 
 //
 //set the enemy spawn off of the screen
@@ -65,9 +67,11 @@ void draw()
   { 
     //image(StickManWithGun, enemyX, enemyY, 20, 30);
     image(StickManWithGun2, enemyX, enemyY, 20, 30);
+    bulletD -= 1;
   } else
   {
     image(StickManWithGun, enemyX, enemyY, 20, 30);
+    bulletD += 1;
   }
 
 
@@ -85,6 +89,7 @@ void draw()
   if (enemyY == 220)
   {
     fallSpeed = 0;
+    newBullet();
   }
 
   //
@@ -132,7 +137,7 @@ void draw()
 
   //
   //left and right key presses increase or decrease the angle
-  //
+  //  
   if (keyPressed) 
   {
     if (keyCode == LEFT) 
@@ -143,10 +148,6 @@ void draw()
     {
       angle += 0.03;
     }
-    if (keyCode == ENTER) 
-   {
-     newHeli();
-   }
   }
 
   //
@@ -176,16 +177,24 @@ void draw()
   fill(175);
   rect(215, 250, 70, -25, 7, 7, 0, 0);
 
-  if (enemyY == 220 && frameCount%60 == 0)
-  {
-    health -= 5;
-  }
+  // if (enemyY == 220 && frameCount%60 == 0)
+  // {
+  //   health -= 5;
+  // }
   //println("health: " + health);
   
   //
   //the healthBar is the health /100
   //
   healthBar = health/10;
+  
+  //
+  //Make a small circle as a bullet when the guy lands on the ground
+  //
+  fill(187, 79, 27);
+  ellipse(bulletX, 215, 5, 5);
+  
+  println("bulletX is: " + bulletX);
   
   //
   //represent the health with a bar and text
@@ -240,4 +249,9 @@ void newEnemy()
   //change fall speed from 0 to 1
   //
   fallSpeed = 1;
+}
+
+void newBullet()
+{
+  bulletX = enemyX + bulletD;
 }

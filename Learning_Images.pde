@@ -9,7 +9,7 @@ float angle = 0;
 int health = 1000;
 float healthBar = 0;
 float bulletX = 10000;
-float bulletD = 0;
+boolean bullet = false;
 
 //
 //set the enemy spawn off of the screen
@@ -67,11 +67,9 @@ void draw()
   { 
     //image(StickManWithGun, enemyX, enemyY, 20, 30);
     image(StickManWithGun2, enemyX, enemyY, 20, 30);
-    bulletD -= 1;
   } else
   {
     image(StickManWithGun, enemyX, enemyY, 20, 30);
-    bulletD += 1;
   }
 
 
@@ -89,9 +87,25 @@ void draw()
   if (enemyY == 220)
   {
     fallSpeed = 0;
-    newBullet();
+    if (bullet == false && enemyX > width/2)
+    {
+      bulletX = enemyX;
+    }
+    if (bullet == false && enemyX < width/2)
+    {
+      bulletX = enemyX + 20;
+    }
+    bullet = true;
   }
-
+  if (bulletX >215 && bulletX <285 || bulletX == 0 || bulletX == 500 || enemyY != 220)
+  {
+    if (bullet == true)
+    {
+      bulletX = 1000;
+      bullet = false;
+    }
+  }
+  //text("mouseX is: " + mouseX, mouseX, mouseY);
   //
   //when the heli reaches the end of the screen (plus a little) make another
   //
@@ -106,7 +120,7 @@ void draw()
   //println("x is: " + heliX);
   //println("enemySpawn is: " + enemySpawn);
   //println("enemyY is: " + enemyY);
-  if ( heliX == enemySpawn)
+  if (heliX == enemySpawn)
   {
     newEnemy();
   }
@@ -161,16 +175,16 @@ void draw()
   {
     angle = 1.2;
   }
-  
+
   //
   //keep on picking random enemySpawns until it fits the criteria
   //
-    if (enemySpawn >175 && enemySpawn <325)
+  if (enemySpawn >175 && enemySpawn <325)
   {
     enemySpawn = floor(random(50, 450));
     println("enemySpawn is: " + enemySpawn);
   }
-  
+
   //
   //Create the turret base with rounded edges
   //
@@ -182,20 +196,28 @@ void draw()
   //   health -= 5;
   // }
   //println("health: " + health);
-  
+
   //
   //the healthBar is the health /100
   //
   healthBar = health/10;
-  
+
   //
   //Make a small circle as a bullet when the guy lands on the ground
   //
+  if (enemyX > width/2) 
+  {
+  bulletX -= 1;
+  }
+  if (enemyX < width/2 )
+  {
+    bulletX += 1;
+  }
   fill(187, 79, 27);
-  ellipse(bulletX, 215, 5, 5);
-  
+  ellipse(bulletX, 230, 4, 2s);
   println("bulletX is: " + bulletX);
-  
+  //if ( enemyY == 220 && bulletX != enemyX)
+
   //
   //represent the health with a bar and text
   //
@@ -228,7 +250,6 @@ void newHeli()
   //Pick a random enemy spawn point(that corresponds with the heli)
   //
   enemySpawn = floor(random(50, 450));
-  
 }
 
 //
@@ -249,9 +270,4 @@ void newEnemy()
   //change fall speed from 0 to 1
   //
   fallSpeed = 1;
-}
-
-void newBullet()
-{
-  bulletX = enemyX + bulletD;
 }

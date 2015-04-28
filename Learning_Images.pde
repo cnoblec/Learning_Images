@@ -103,6 +103,7 @@ void draw()
     {
       bulletX = 1000;
       bullet = false;
+      health -= 1;
     }
   }
   //text("mouseX is: " + mouseX, mouseX, mouseY);
@@ -214,7 +215,7 @@ void draw()
     bulletX += 1;
   }
   fill(187, 79, 27);
-  ellipse(bulletX, 230, 4, 2s);
+  ellipse(bulletX, 230, 4, 2);
   println("bulletX is: " + bulletX);
   //if ( enemyY == 220 && bulletX != enemyX)
 

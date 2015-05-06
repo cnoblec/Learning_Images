@@ -6,7 +6,7 @@ float heliX = 0;
 float enemySpawn = 0;
 float fallSpeed = 1;
 float angle = 0;
-int health = 1000;
+float health = 1000;
 float healthBar = 0;
 float bulletX = 10000;
 boolean bullet = false;
@@ -87,23 +87,28 @@ void draw()
   if (enemyY == 220)
   {
     fallSpeed = 0;
-    if (bullet == false && enemyX > width/2)
+    if (frameCount % 60 == 0)
     {
-      bulletX = enemyX;
+      if (bullet == false && enemyX > width/2)
+      {
+        println("BANGARANG");
+        bulletX = enemyX;
+      }
+      if (bullet == false && enemyX < width/2)
+      {
+        println("BANGARANG");
+        bulletX = enemyX + 20;
+      }
+      bullet = true;
     }
-    if (bullet == false && enemyX < width/2)
-    {
-      bulletX = enemyX + 20;
-    }
-    bullet = true;
   }
   if (bulletX >215 && bulletX <285 || bulletX == 0 || bulletX == 500 || enemyY != 220)
   {
     if (bullet == true)
     {
-      bulletX = 1000;
+      bulletX = -100000;
       bullet = false;
-      health -= 1;
+      health -= 5;
     }
   }
   //text("mouseX is: " + mouseX, mouseX, mouseY);
@@ -208,15 +213,15 @@ void draw()
   //
   if (enemyX > width/2) 
   {
-  bulletX -= 1;
+    bulletX -= 5;
   }
   if (enemyX < width/2 )
   {
-    bulletX += 1;
+    bulletX += 5;
   }
   fill(187, 79, 27);
   ellipse(bulletX, 230, 4, 2);
-  println("bulletX is: " + bulletX);
+  //println("health is: " + health);
   //if ( enemyY == 220 && bulletX != enemyX)
 
   //

@@ -10,6 +10,11 @@ float health = 1000;
 float healthBar = 0;
 float bulletX = 10000;
 boolean bullet = false;
+float a = 0;
+float h = 0;
+float x = 0;
+float y = 0;
+float k = 0;
 
 //
 //set the enemy spawn off of the screen
@@ -34,6 +39,15 @@ void setup()
   //
   StickManWithGun = loadImage("StickManWithGun.gif");
   StickManWithGun2 = loadImage("StickManWithGun2.gif");
+
+  //
+  //set up the variables for the parabola
+  //
+  a = 0.01;
+  h = 400;
+  x = 5000;
+  y = 5000;
+  k = 0;
 
   //
   //run newHeli
@@ -67,7 +81,8 @@ void draw()
   { 
     //image(StickManWithGun, enemyX, enemyY, 20, 30);
     image(StickManWithGun2, enemyX, enemyY, 20, 30);
-  } else
+  } 
+  else
   {
     image(StickManWithGun, enemyX, enemyY, 20, 30);
   }
@@ -91,7 +106,6 @@ void draw()
     {
       if (bullet == false && enemyX > width/2)
       {
-        println("BANGARANG");
         bulletX = enemyX;
       }
       if (bullet == false && enemyX < width/2)
@@ -108,10 +122,15 @@ void draw()
     {
       bulletX = -100000;
       bullet = false;
-      health -= 5;
+      health -= 25;
     }
   }
-  //text("mouseX is: " + mouseX, mouseX, mouseY);
+
+  if (health < 0)
+  {
+    health = 0;
+  }
+  text("mouseY is: " + mouseY, mouseX, mouseY);
   //
   //when the heli reaches the end of the screen (plus a little) make another
   //
@@ -182,6 +201,32 @@ void draw()
     angle = 1.2;
   }
 
+  if (angle < 0)
+  {
+    y = a*pow(-1*(x-h), 2)+k;
+    x = x - 1;
+  } 
+  else 
+  {
+    y = a*pow((x-h), 2)+k;
+    x = x + 1;
+  }
+    if (keyPressed)
+  {
+    x=250;
+    y=220;
+  }
+  
+  h = 350 + angle*100;
+  k = 0 + angle*100;
+  println("h is: " + h);
+  
+  //
+  //make a bullet as a small circle
+  //
+  fill(0);
+  ellipse(x, y, 12, 12);
+  
   //
   //keep on picking random enemySpawns until it fits the criteria
   //
@@ -267,6 +312,7 @@ void newEnemy()
   //the enemy x will be the same as the helicopters x
   //
   enemyX = heliX;
+
   //
   //the enemy y will be the same as the heicopter when it spawns
   //

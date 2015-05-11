@@ -192,13 +192,13 @@ void draw()
   //
   //stop the roatation when the angle is -1.2 and when it is 1.2
   //
-  if (angle < -1.2)
+  if (angle < -1)
   {
-    angle = -1.2;
+    angle = -1;
   }
-  if (angle > 1.2)
+  if (angle > 1)
   {
-    angle = 1.2;
+    angle = 1;
   }
 
   if (angle < 0)
@@ -217,15 +217,16 @@ void draw()
     y=220;
   }
   
-  h = 350 + angle*100;
-  k = 0 + angle*100;
+  h = 250 + angle*100;
+  k = 75 + angle*100;
   println("h is: " + h);
+  a = (220-k)/pow(250-h,2);
   
   //
   //make a bullet as a small circle
   //
   fill(0);
-  ellipse(x, y, 12, 12);
+  ellipse(x, y, 10, 10);
   
   //
   //keep on picking random enemySpawns until it fits the criteria

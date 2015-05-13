@@ -130,7 +130,7 @@ void draw()
   {
     health = 0;
   }
-  text("mouseY is: " + mouseY, mouseX, mouseY);
+
   //
   //when the heli reaches the end of the screen (plus a little) make another
   //
@@ -205,29 +205,29 @@ void draw()
   {
     y = a*pow(-1*(x-h), 2)+k;
     x = x - 1;
-  } 
+  }
   else 
   {
     y = a*pow((x-h), 2)+k;
     x = x + 1;
   }
-    if (keyPressed)
+  if (keyPressed)
   {
     x=250;
     y=220;
   }
-  
+
   h = 250 + angle*100;
   k = 75 + angle*100;
   println("h is: " + h);
-  a = (220-k)/pow(250-h,2);
-  
+  a = (220-k)/pow(250-h, 2);
+
   //
   //make a bullet as a small circle
   //
   fill(0);
   ellipse(x, y, 10, 10);
-  
+
   //
   //keep on picking random enemySpawns until it fits the criteria
   //
@@ -273,7 +273,15 @@ void draw()
   //
   //represent the health with a bar and text
   //
-  fill(255);
+
+  if (health > 0)
+  {
+    fill(255);
+  } 
+  else
+  {
+    fill(360, 0, 0);
+  }
   textSize(32);
   text("HP: ", 0, 287);
   rect(60, 260, healthBar, 32);

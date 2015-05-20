@@ -19,7 +19,7 @@ float k = 0;
 //
 //set the enemy spawn off of the screen
 //
-float enemyX = -100;
+int enemyX = -1000;
 int enemyY = -1000;
 
 void setup()
